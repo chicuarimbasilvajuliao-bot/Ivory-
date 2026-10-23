@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbershop Elite | Equipe Profissional</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+    
+    :root {
+      --gold: #D4AF37;
+      --gold-light: #F5D76E;
+      --black: #0a0a0a;
+      --dark: #141414;
+      --gray: #1f1f1f;
+      --text: #e8e8e8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    header {
+      background: linear-gradient(180deg, var(--dark) 0%, var(--black) 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+    
+    .logo span {
+      color: var(--text);
+      font-weight: 400;
+    }
+    
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      margin-left: 2rem;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    
+    nav a:hover {
+      color: var(--gold);
+    }
+    
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 450px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    
+    .hero img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.45;
+      filter: brightness(0.7) contrast(1.1);
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 2rem;
+    }
+    
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+    
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      color: #ccc;
+    }
+    
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 0.85rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.3s;
+    }
+    
+    .btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+    
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: #999;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+    
+    /* Team */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    
+    .member-card {
+      background: var(--gray);
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.8rem;
+      text-align: center;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .member-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    }
+    
+    .member-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
+    }
+    
+    .member-number {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+    
+    .member-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--gold-light);
+      margin-bottom: 0.4rem;
+    }
+    
+    .member-card .role {
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.8rem;
+    }
+    
+    .member-card p {
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+      background: var(--gray);
+      transition: transform 0.3s;
+    }
+    
+    .gallery-item:hover {
+      transform: scale(1.02);
+      border-color: var(--gold);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .gallery-item.wide img {
+      height: 280px;
+    }
+    
+    .gallery-caption {
+      padding: 0.9rem 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+      text-align: center;
+      border-top: 1px solid #2a2a2a;
+    }
+    
+    /* Products */
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    @media (max-width: 700px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .product-shot {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #2a2a2a;
+    }
+    
+    .product-shot img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Recommendations */
+    .recs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .rec-card {
+      background: var(--gray);
+      border-left: 4px solid var(--gold);
+      padding: 1.5rem;
+      border-radius: 0 10px 10px 0;
+    }
+    
+    .rec-card .stars {
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+      letter-spacing: 2px;
+    }
+    
+    .rec-card p {
+      font-style: italic;
+      color: #ccc;
+      margin-bottom: 0.8rem;
+    }
+    
+    .rec-card .author {
+      font-weight: 600;
+      color: var(--gold-light);
+      font-size: 0.9rem;
+    }
+    
+    footer {
+      background: var(--dark);
+      border-top: 2px solid var(--gold);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      margin-top: 2rem;
+    }
+    
+    footer p {
+      color: #888;
+      font-size: 0.95rem;
+    }
+    
+    footer .gold {
+      color: var(--gold);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">BARBER <span>ELITE</span></div>
+    <nav>
+      <a href="#equipe">Equipe</a>
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#recomendacoes">Recomendações</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <img src="trabalho-corte-costas.jpg" alt="Corte profissional em andamento">
+    <div class="hero-content">
+      <h1>Excelência em Cada Corte</h1>
+      <p>Equipe profissional dedicada a transformar o seu visual com precisão, estilo e produtos de qualidade.</p>
+      <a href="#equipe" class="btn">Conheça a Equipe</a>
+    </div>
+  </section>
+
+  <section id="equipe">
+    <h2 class="section-title">Nossa Equipe</h2>
+    <p class="section-subtitle">Profissionais qualificados • Compromisso com a excelência</p>
+    
+    <div class="team-grid">
+      <div class="member-card">
+        <span class="member-number">Nº 33</span>
+        <h3>João Francisco</h3>
+        <div class="role">Barbeiro Principal</div>
+        <p>Especialista em cortes clássicos e modernos. Líder da equipe com anos de experiência.</p>
+      </div>
+      
+      <div class="member-card">
+        <span class="member-number">Nº 35</span>
+        <h3>Kelvin Sérgio</h3>
+        <div class="role">Especialista em Fades</div>
+        <p>Mestre em degradês precisos e acabamentos impecáveis. Referência em técnicas de fade.</p>
+      </div>
+      
+      <div class="member-card">
+        <span class="member-number">Nº 37</span>
+        <h3>Leovigildo Langa</h3>
+        <div class="role">Barbeiro de Design</div>
+        <p>Criativo em designs laterais, linhas e detalhes artísticos que destacam cada cliente.</p>
+      </div>
+      
+      <div class="member-card">
+        <span class="member-number">Nº 53</span>
+        <h3>Rivaldo Manuel</h3>
+        <div class="role">Gerente & Atendimento</div>
+        <p>Responsável pela organização, atendimento ao cliente e qualidade do serviço.</p>
+      </div>
+      
+      <div class="member-card">
+        <span class="member-number">Nº 54</span>
+        <h3>Rod Augusto</h3>
+        <div class="role">Barbeiro Profissional</div>
+        <p>Focado em cortes masculinos contemporâneos e cuidado com a barba.</p>
+      </div>
+      
+      <div class="member-card">
+        <span class="member-number">Nº 56</span>
+        <h3>Silva Julião</h3>
+        <div class="role">Especialista em Produtos</div>
+        <p>Conhecedor de produtos de styling, pós-barba e cuidados capilares de alta performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="trabalhos">
+    <h2 class="section-title">Nossos Trabalhos</h2>
+    <p class="section-subtitle">Resultados reais • Técnica e precisão</p>
+    
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="trabalho-corte-costas.jpg" alt="Corte na nuca com máquina">
+        <div class="gallery-caption">Acabamento preciso na nuca e contornos</div>
+      </div>
+      
+      <div class="gallery-item">
+        <img src="trabalho-fade-perfil.jpg" alt="Fade com design lateral">
+        <div class="gallery-caption">Fade limpo com design personalizado</div>
+      </div>
+      
+      <div class="gallery-item wide">
+        <img src="barbeiro-em-acao.jpg" alt="Barbeiro em ação">
+        <div class="gallery-caption">Profissional em plena atividade</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="produtos">
+    <h2 class="section-title">Produtos & Cuidados</h2>
+    <p class="section-subtitle">Linha completa para styling, barba e pós-barba</p>
+    
+    <div class="products-grid">
+      <div class="product-shot">
+        <img src="produtos-1.jpg" alt="Prateleira de produtos 1">
+      </div>
+      <div class="product-shot">
+        <img src="produtos-2.jpg" alt="Prateleira de produtos 2">
+      </div>
+    </div>
+  </section>
+
+  <section id="recomendacoes">
+    <h2 class="section-title">Recomendações</h2>
+    <p class="section-subtitle">O que os nossos clientes dizem</p>
+    
+    <div class="recs">
+      <div class="rec-card">
+        <div class="stars">★★★★★</div>
+        <p>"Melhor corte que já fiz. O fade ficou perfeito e o atendimento foi top!"</p>
+        <div class="author">— Cliente Satisfeito</div>
+      </div>
+      
+      <div class="rec-card">
+        <div class="stars">★★★★★</div>
+        <p>"Profissionais dedicados e ambiente agradável. Recomendo a todos."</p>
+        <div class="author">— Frequente da Casa</div>
+      </div>
+      
+      <div class="rec-card">
+        <div class="stars">★★★★★</div>
+        <p>"Detalhes impecáveis e produtos de qualidade. Saí renovado!"</p>
+        <div class="author">— Novo Cliente</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><span class="gold">BARBER ELITE</span> • Equipe Nº 33 • 35 • 37 • 53 • 54 • 56</p>
+    <p style="margin-top: 0.5rem;">João Francisco • Kelvin Sérgio • Leovigildo Langa • Rivaldo Manuel • Rod Augusto • Silva Julião</p>
+    <p style="margin-top: 1rem; font-size: 0.85rem;">Site preparado para GitHub Pages • Tema Preto & Dourado</p>
+  </footer>
+</body>
+</html>
